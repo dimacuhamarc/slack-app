@@ -3,7 +3,7 @@ import { API_URL } from '../constants/Constants';
 import axios from 'axios';
 
 import SlackLogo from "../assets/img/slacklogo.png"
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn({handleToggle}) {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -14,6 +14,8 @@ function SignIn({handleToggle}) {
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem('user') || null)
   );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -48,10 +50,9 @@ function SignIn({handleToggle}) {
           expiry,
           client,
           uid,
-          id: data.data.id
+          id: data.data.id,
+          email: data.data.email
         })
-        
-        alert('Login Successful');
         setIsSignedIn(true);
       }
     }
@@ -59,13 +60,14 @@ function SignIn({handleToggle}) {
       setError(true);
       setErrorMessage('Error: Invalid Credentials');
     }
+    window.location.reload();
   }
 
   return (
     <>
-      {
-        isSignedIn && <Navigate to="/dashboard" />
-      }
+    {
+      isSignedIn && navigate('/dashboard')
+    }
       <div className="flex flex-col items-center justify-center h-auto w-full">
         <h1 className=" text-3xl font-bold m-2 text-gray-200">
           Sign in to Slack!
