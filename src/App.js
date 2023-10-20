@@ -1,10 +1,10 @@
 import './App.scss';
-import Onboarding from './pages/Onboarding';
+import Routing from './Routing';
 
 function App() {
   return (
     <div className="bg-slate-950 w-screen h-screen">
-      <Onboarding/>
+      <Routing />
     </div>
   );
 }

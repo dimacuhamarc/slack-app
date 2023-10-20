@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { API_URL } from '../constants/Constants';
 import axios from 'axios';
 
-import { BiBlock } from 'react-icons/bi';
-
 import SlackLogo from "../assets/img/slacklogo.png"
+import { Navigate } from 'react-router-dom';
 
 function SignIn({handleToggle}) {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -64,6 +63,9 @@ function SignIn({handleToggle}) {
 
   return (
     <>
+      {
+        isSignedIn && <Navigate to="/dashboard" />
+      }
       <div className="flex flex-col items-center justify-center h-auto w-full">
         <h1 className=" text-3xl font-bold m-2 text-gray-200">
           Sign in to Slack!
