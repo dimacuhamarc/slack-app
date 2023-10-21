@@ -115,6 +115,74 @@ function SignIn({handleToggle}) {
 }
 
 function SignUp({handleToggle}) {
+  // [wip] pau 10/20-21
+  const [newUser, setNewUser] = useState({email: "", password: "", passwordConfirmation: "",});
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // [trial, might remove if this will not work, pau 10/21]
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
+  
+  async function handleSignUp(){
+    if (isSubmitting) {
+      return; // [trial] nothing should happen if sub is ongoing
+    }
+
+    if (!newUser.email || !newUser.password || !newUser.passwordConfirmation) {
+      setErrorMessage("Error: Please fill out all fields");
+      return;
+    }
+  
+    if (newUser.password !== newUser.passwordConfirmation) {
+      setErrorMessage("Error: Passwords do not match");
+      return;
+    }
+
+    setIsSubmitting(true); // [trial] 
+  
+    const signUpData = {
+      email: newUser.email,
+      password: newUser.password,
+      password_confirmation: newUser.passwordConfirmation,
+    };
+  
+    try {
+      const response = await axios.post(`${API_URL}/auth`, signUpData);
+      setSuccessMessage("Sign-up successful. Please sign in.");
+      setErrorMessage("");
+      setIsSubmitting(false); // [trial 10/21]
+      if (response.data && response.data.errors && response.data.errors.full_messages) {
+        setErrorMessage(response.data.errors.full_messages[0]);
+      } else {
+        setNewUser({
+          email: "",
+          password: "",
+          passwordConfirmation: "",
+        });
+      } // [remove until here if this doesn't work] 
+      // setNewUser({
+      //   email: "",
+      //   password: "",
+      //   passwordConfirmation: "",
+      // });
+    } catch (error) {
+      setIsSubmitting(false);
+      if (error.response && error.response.data && error.response.data.errors && error.response.data.errors.full_messages) {
+        const fullMessages = error.response.data.errors.full_messages;
+        if (fullMessages.length > 0) {
+          setErrorMessage(fullMessages[0]);
+        } else {
+          setErrorMessage("Error: Signup failed. Please try again.");
+        }
+      } else {
+        setErrorMessage("Error: Signup failed. Please try again.");
+      }
+    }
+  };
+  
   return (
     <>
       <div className="flex flex-col items-center justify-center h-auto w-full">
@@ -130,7 +198,10 @@ function SignUp({handleToggle}) {
           className="border border-gray-400 rounded-md p-2 w-full"
           type="text"
           name="email"
+          value={newUser.email}
+          onChange={handleFormChange}
           placeholder="User@slack.com"
+          onFocus={() => setErrorMessage('')}
         />
       </div>
 
@@ -142,7 +213,10 @@ function SignUp({handleToggle}) {
           className="border border-gray-400 rounded-md p-2 w-full"
           type="password"
           name="password"
+          value={newUser.password}
+          onChange={handleFormChange}
           placeholder="Enter your password"
+          onFocus={() => setErrorMessage('')}
         />
       </div>
 
@@ -153,15 +227,30 @@ function SignUp({handleToggle}) {
         <input
           className="border border-gray-400 rounded-md p-2 w-full"
           type="password"
-          name="password"
+          name="passwordConfirmation"
+          value={newUser.passwordConfirmation}
+          onChange={handleFormChange}
           placeholder="Enter your password"
+          onFocus={() => setErrorMessage('')}
         />
       </div>
 
       <div className="flex flex-col items-start justify-center h-auto w-full">
-        <button className="text-sm w-full h-12 font-bold my-4 bg-indigo-400 text-indigo-100 rounded-md hover:bg-indigo-300 hover:text-indigo-600 cursor-pointer select-none ">
+        <button onClick={handleSignUp} disabled={isSubmitting} className="text-sm w-full h-12 font-bold my-4 bg-indigo-400 text-indigo-100 rounded-md hover:bg-indigo-300 hover:text-indigo-600 cursor-pointer select-none ">
           Sign Up
         </button>
+
+        {errorMessage && (
+        <div className="flex flex-col items-center justify-center text-sm w-full h-12 font-bold bg-red-600 bg-opacity-70 outline-red-500 outline outline-2 text-indigo-100 rounded-md hover:brightness-110 select-none">
+          {errorMessage}
+          </div>
+      )}
+      {successMessage && (
+        <div className="flex flex-col items-center justify-center text-sm w-full h-12 font-bold bg-blue-600 bg-opacity-70 outline-blue-500 outline outline-2 text-indigo-100 rounded-md hover:brightness-110 select-none">
+          {successMessage}
+          </div>
+      )}
+
       </div>
       <div className="flex flex-col items-center justify-center h-auto w-full">
         <p className="text-center mt-2 mb-8 text-indigo-300">Already have an account? <button className="text-white underline underline-offset-4" onClick={handleToggle}>Sign In</button></p>

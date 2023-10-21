@@ -33,7 +33,7 @@ export const MainNav = () => {
         <img src="https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png" alt="Slack Logo" className="ring-[2px] ring-offset-[4px] ring-offset-indigo-500 ring-indigo-200 bg-gray-200 bg-opacity-30 p-2 mb-4 rounded-xl h-10 w-10 hover:scale-105 hover:brightness-110" />
         {
           MainLinks.map((link, index) => (
-            <Link>
+            <Link key={index}>
               <div className='hover:bg-gray-200 hover:bg-opacity-30 text-white p-2 rounded-xl h-10 w-10 hover:scale-105 hover:brightness-110 text-[1.5rem]'>
                 {link.icon} 
               </div>
