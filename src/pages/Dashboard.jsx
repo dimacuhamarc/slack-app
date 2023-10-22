@@ -1,7 +1,16 @@
 import { MainNav } from "../components/MainNav";
 import { AiFillCaretDown } from "react-icons/ai";
+import { useState } from "react";
+import Channels from "../components/Channels";
+import AddChannels from "../components/AddChannels";
 
 function Dashboard(props) {
+  const [channelsVisible, setChannelsVisible] = useState(false);
+
+  const toggleChannels = () => {
+    setChannelsVisible(!channelsVisible);
+  };
+
   return (
     <div>
       <MainNav />
@@ -10,6 +19,13 @@ function Dashboard(props) {
           <h1 className="font-bold text-xl">Avion School </h1>
           <span className="text-xs"><AiFillCaretDown/></span>
         </div>
+
+        <div className="flex flex-col content-start justify-start items-start mt-5">
+          <Channels toggleChannels={toggleChannels} />
+          {channelsVisible && (<AddChannels />)}
+        </div>
+
+
       </div>
     </div>
   );
