@@ -65,9 +65,6 @@ function SignIn({handleToggle}) {
 
   return (
     <>
-    {
-      isSignedIn && navigate('/dashboard')
-    }
       <div className="flex flex-col items-center justify-center h-auto w-full">
         <h1 className=" text-3xl font-bold m-2 text-gray-200">
           Sign in to Slack!

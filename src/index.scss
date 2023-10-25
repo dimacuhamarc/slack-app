@@ -3,7 +3,8 @@
   margin: 0 auto;
   box-sizing: border-box;
   transition: all 0.3s ease-in;
-  // outline: red solid 1px;
+  user-select: none;
+  //outline: rgba(255, 0, 0, 0.429) solid 1px;
 }
 
 body {

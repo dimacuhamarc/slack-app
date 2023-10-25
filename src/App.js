@@ -1,11 +1,12 @@
 import './App.scss';
 import Routing from './Routing';
+import { DashboardLayout } from './layouts/DashboardLayout';
 
 function App() {
   return (
-    <div className="bg-slate-950 w-screen h-screen">
+    <DashboardLayout>
       <Routing />
-    </div>
+    </DashboardLayout>
   );
 }
 

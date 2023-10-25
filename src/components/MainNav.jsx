@@ -3,7 +3,7 @@ import {
   AiFillWechat,
   AiOutlineEllipsis
 } from 'react-icons/ai';
-import { BiSolidUserCircle } from 'react-icons/bi';
+import { IoLogOut } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 const MainLinks = [
@@ -45,7 +45,7 @@ export const MainNav = () => {
       <div className='mb-4'>
         <Link onClick={handleLogout}>
           <div className='hover:bg-gray-200 hover:bg-opacity-30 text-white p-1 rounded-xl h-10 w-10 hover:scale-105 hover:brightness-110 text-[2rem]'>
-            <BiSolidUserCircle/> 
+            <IoLogOut/> 
           </div>
         </Link>
       </div>

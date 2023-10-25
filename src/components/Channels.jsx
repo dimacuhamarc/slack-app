@@ -11,22 +11,18 @@ function Channels( { toggleChannels} ) {
     }
 
   return (
-    <div>
-
-      <div className="flex w-full">
-        <span
-            className="text-xs hover:bg-gray-200 hover:bg-opacity-30 cursor-pointer p-2 rounded"
-            onClick={toggleIcon}>
-                {caretIconDown ? <AiFillCaretRight /> : <AiFillCaretDown />}
-        </span>
-
-        <h2 className="hover:bg-gray-200 hover:bg-opacity-30 py-0.5 px-1.5 rounded cursor-pointer">
-          Channels
-        </h2>
-      </div>
-
+    <div
+      className="inline-flex items-center gap-2 text-xs cursor-pointer rounded w-full"
+      onClick={toggleIcon}>
+      <span className=" hover:bg-gray-800 hover:bg-opacity-30 rounded text-xs p-2">
+        {caretIconDown ? 
+          <AiFillCaretRight /> : <AiFillCaretDown />
+        }
+      </span>
+      <h1 className="hover:bg-gray-800 hover:bg-opacity-30 rounded pl-2 text-base font-bold w-full h-7">Channels</h1>
     </div>
   );
 };
 
 export default Channels;
+
