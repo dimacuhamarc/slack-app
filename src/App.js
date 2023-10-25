@@ -1,12 +1,12 @@
 import './App.scss';
 import Routing from './Routing';
-import { DashboardLayout } from './layouts/DashboardLayout';
+import { MainLayout } from './layouts/MainLayout';
 
 function App() {
   return (
-    <DashboardLayout>
+    <MainLayout>
       <Routing />
-    </DashboardLayout>
+    </MainLayout>
   );
 }
 

@@ -3,7 +3,6 @@ import { API_URL } from '../constants/Constants';
 import axios from 'axios';
 
 import SlackLogo from "../assets/img/slacklogo.png"
-import { useNavigate } from 'react-router-dom';
 
 function SignIn({handleToggle}) {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -14,8 +13,6 @@ function SignIn({handleToggle}) {
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem('user') || null)
   );
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
