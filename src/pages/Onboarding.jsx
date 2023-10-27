@@ -180,7 +180,7 @@ function SignUp({handleToggle}) {
   return (
     <>
       <div className="flex flex-col items-center justify-center h-auto w-full">
-        <h1 className=" text-3xl font-bold m-2 text-gray-200">
+        <h1 className=" text-3xl font-bold m-2 text-gray-200 text-center">
           Create an Account!
         </h1>
         <p className="text-center mt-2 text-indigo-300">We suggest using the email address you use at work.</p>

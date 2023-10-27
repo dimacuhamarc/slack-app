@@ -1,5 +1,6 @@
 import React from 'react';
-import { MdAdd, MdLock } from 'react-icons/md';
+import { FaLock } from 'react-icons/fa';
+import { MdAdd } from 'react-icons/md';
 import { Popover, Transition } from '@headlessui/react';
 
 function AddChannels() {
@@ -9,7 +10,7 @@ function AddChannels() {
         <>
           <button className="inline-flex items-center w-full hover:bg-gray-800 hover:bg-opacity-30 rounded p-1" >
             <span className="text-xs p-2">
-              <MdLock />
+              <FaLock />
             </span>
             <h2 className='text-xs w-full pl-2 text-left'>Channel #1</h2>
           </button>

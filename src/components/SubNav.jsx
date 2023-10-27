@@ -4,6 +4,11 @@ import AddChannels from "../components/AddChannels";
 
 export const SubNav = () => {
   const [channelsVisible, setChannelsVisible] = useState(false);
+  const [dmVisible, setDmVisible] = useState(false);
+
+  const toggleDMs = () => {
+    setDmVisible(!dmVisible);
+  };
 
   const toggleChannels = () => {
     setChannelsVisible(!channelsVisible);
