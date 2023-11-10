@@ -5,16 +5,12 @@ import AddChannels from "./Channel/AddChannels";
 import ChannelModal from "./Channel/ChannelModal";
 import axios from "axios";
 
-export const SubNav = (user) => {
+export const SubNav = () => {
   const [channelsVisible, setChannelsVisible] = useState(false);
   const [channelModVisible, setChannelModVisible] = useState(false);
   const [dmVisible, setDmVisible] = useState(false);
-
-  // useEffect(() => {
-  //   if(user){
-  //     createChannel();
-  //   }
-  // }, []);
+  const [newChannel, setNewChannel] = useState({name:"", userId:"",})
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const openModal = () => {
     setChannelModVisible(true);
@@ -41,6 +37,7 @@ export const SubNav = (user) => {
     });
     const { data } = response;
     if(data) {
+      setNewChannel(data);
       return alert("Successfully Created Channel")
     }
     } catch (error) {
