@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
 
-function Channels( { toggleChannels} ) {
+function ChannelList ( { toggleChannels} ) {
     const [caretIconDown, setCaretIconDown] = useState(true);
 
     const toggleIcon = () => {
@@ -24,5 +24,5 @@ function Channels( { toggleChannels} ) {
   );
 };
 
-export default Channels;
+export default ChannelList;
 

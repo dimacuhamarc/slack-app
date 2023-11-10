@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { API_URL } from '../constants/Constants';
 import axios from 'axios';
-
+import Loader from '../components/Loader/Loader';
 import SlackLogo from "../assets/img/slacklogo.png"
 
-function SignIn({handleToggle}) {
+function SignIn({ handleToggle }) {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('Error Message');
@@ -13,6 +13,7 @@ function SignIn({handleToggle}) {
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem('user') || null)
   );
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -29,91 +30,197 @@ function SignIn({handleToggle}) {
       setErrorMessage('Error: Please fill out all fields');
     }
 
-    try {
-      const loginCredentials = {
-        email,
-        password
-      }
-      const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
-      const { data, headers } = response;
-      if (data && headers) {
-        const accessToken = headers["access-token"];
-        const expiry = headers["expiry"];
-        const client = headers["client"];
-        const uid = headers["uid"];
+    setLoading(true); //try 
 
-        setUser({
-          accessToken,
-          expiry,
-          client,
-          uid,
-          id: data.data.id,
-          email: data.data.email
-        })
-        setIsSignedIn(true);
+    setTimeout(async () => {
+      try {
+        const loginCredentials = {
+          email,
+          password,
+        };
+        const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
+        const { data, headers } = response;
+        if (data && headers) {
+          const accessToken = headers["access-token"];
+          const expiry = headers["expiry"];
+          const client = headers["client"];
+          const uid = headers["uid"];
+  
+          setUser({
+            accessToken,
+            expiry,
+            client,
+            uid,
+            id: data.data.id,
+            email: data.data.email,
+          });
+          setIsSignedIn(true);
+        }
+      } catch (error) {
+        setError(true);
+        setErrorMessage('Error: Invalid Credentials');
       }
-    }
-    catch (error) {
-      setError(true);
-      setErrorMessage('Error: Invalid Credentials');
-    }
-    window.location.reload();
+  
+      setLoading(false);
+      window.location.reload();
+    }, 3000); 
   }
+
+  //   try {
+  //     const loginCredentials = {
+  //       email,
+  //       password
+  //     }
+  //     const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
+  //     const { data, headers } = response;
+  //     if (data && headers) {
+  //       const accessToken = headers["access-token"];
+  //       const expiry = headers["expiry"];
+  //       const client = headers["client"];
+  //       const uid = headers["uid"];
+
+  //       setUser({
+  //         accessToken,
+  //         expiry,
+  //         client,
+  //         uid,
+  //         id: data.data.id,
+  //         email: data.data.email
+  //       })
+  //       setIsSignedIn(true);
+  //     }
+  //   }
+  //   catch (error) {
+  //     setError(true);
+  //     setErrorMessage('Error: Invalid Credentials');
+  //   }
+  //   window.location.reload();
+  // }
+
+  // return (
+  //   <>
+  //     <div className="flex flex-col items-center justify-center h-auto w-full">
+  //       <h1 className=" text-3xl font-bold m-2 text-gray-200">
+  //         Sign in to Slack!
+  //       </h1>
+  //       <p className="text-center mt-2 text-indigo-300">We suggest using the email address you   used to sign up.</p>
+  //     </div>
+
+  //     <div className="flex flex-col items-start justify-center h-auto w-full">
+  //       <label className="text-sm font-bold m-2 text-gray-200">Email</label>
+  //       <input
+  //         className="border border-gray-400 rounded-md p-2 w-full"
+  //         type="text"
+  //         name="email"
+  //         onChange={(e) => setEmail(e.target.value)}
+  //         placeholder="User@slack.com"
+  //       />
+  //     </div>
+  //     <div className="flex flex-col items-start justify-center h-auto w-full">
+  //       <label className="text-sm font-bold m-2 text-gray-200">
+  //         Password
+  //       </label>
+  //       <input
+  //         className="border border-gray-400 rounded-md p-2 w-full"
+  //         type="password"
+  //         name="password"
+  //         onChange={(e) => setPassword(e.target.value)}
+  //         placeholder="Enter your password"
+  //       />
+  //     </div>
+  //     <div className="flex flex-col items-start justify-center h-auto w-full">
+  //       <button onClick={handleSubmit} className="text-sm w-full h-12 font-bold my-4 bg-indigo-400 text-indigo-100 rounded-md hover:bg-indigo-300 hover:text-indigo-600 cursor-pointer select-none ">
+  //         Sign In
+  //       </button>
+  //       {
+  //         error && <p type="submit" className="flex flex-col items-center justify-center text-sm w-full h-12 font-bold bg-red-600 bg-opacity-70 outline-red-500 outline outline-2 text-indigo-100 rounded-md hover:brightness-110 select-none">
+  //         {errorMessage}
+  //       </p>
+  //       }
+  //     </div>
+  //     <div className="flex flex-col items-center justify-center h-auto w-full">
+  //       <p className="text-center mt-2 mb-8 text-indigo-300">New to Slack? <button className="text-white underline underline-offset-4" onClick={handleToggle}>Create an account</button></p>
+  //     </div>
+  //   </>
+  // );
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-auto w-full">
-        <h1 className=" text-3xl font-bold m-2 text-gray-200">
-          Sign in to Slack!
-        </h1>
-        <p className="text-center mt-2 text-indigo-300">We suggest using the email address you   used to sign up.</p>
-      </div>
-
-      <div className="flex flex-col items-start justify-center h-auto w-full">
-        <label className="text-sm font-bold m-2 text-gray-200">Email</label>
-        <input
-          className="border border-gray-400 rounded-md p-2 w-full"
-          type="text"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="User@slack.com"
-        />
-      </div>
-      <div className="flex flex-col items-start justify-center h-auto w-full">
-        <label className="text-sm font-bold m-2 text-gray-200">
-          Password
-        </label>
-        <input
-          className="border border-gray-400 rounded-md p-2 w-full"
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-        />
-      </div>
-      <div className="flex flex-col items-start justify-center h-auto w-full">
-        <button onClick={handleSubmit} className="text-sm w-full h-12 font-bold my-4 bg-indigo-400 text-indigo-100 rounded-md hover:bg-indigo-300 hover:text-indigo-600 cursor-pointer select-none ">
-          Sign In
-        </button>
-        {
-          error && <p type="submit" className="flex flex-col items-center justify-center text-sm w-full h-12 font-bold bg-red-600 bg-opacity-70 outline-red-500 outline outline-2 text-indigo-100 rounded-md hover:brightness-110 select-none">
-          {errorMessage}
-        </p>
-        }
-      </div>
-      <div className="flex flex-col items-center justify-center h-auto w-full">
-        <p className="text-center mt-2 mb-8 text-indigo-300">New to Slack? <button className="text-white underline underline-offset-4" onClick={handleToggle}>Create an account</button></p>
-      </div>
+      {loading ? ( 
+        <div className="flex items-center justify-center h-auto w-full">
+          <Loader />
+        </div>
+      ) : (
+        <div>
+          <div className="flex flex-col items-center justify-center h-auto w-full">
+            <h1 className="text-3xl font-bold m-2 text-gray-200">
+              Sign in to Slack!
+            </h1>
+            <p className="text-center mt-2 text-indigo-300">
+              We suggest using the email address you used to sign up.
+            </p>
+          </div>
+  
+          <div className="flex flex-col items-start justify-center h-auto w-full">
+            <label className="text-sm font-bold m-2 text-gray-200">Email</label>
+            <input
+              className="border border-gray-400 rounded-md p-2 w-full"
+              type="text"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="User@slack.com"
+            />
+          </div>
+          <div className="flex flex-col items-start justify-center h-auto w-full">
+            <label className="text-sm font-bold m-2 text-gray-200">
+              Password
+            </label>
+            <input
+              className="border border-gray-400 rounded-md p-2 w-full"
+              type="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+            />
+          </div>
+          <div className="flex flex-col items-start justify-center h-auto w-full">
+            <button
+              onClick={handleSubmit}
+              className="text-sm w-full h-12 font-bold my-4 bg-indigo-400 text-indigo-100 rounded-md hover:bg-indigo-300 hover:text-indigo-600 cursor-pointer select-none "
+            >
+              Sign In
+            </button>
+            {error && (
+              <p
+                type="submit"
+                className="flex flex-col items-center justify-center text-sm w-full h-12 font-bold bg-red-600 bg-opacity-70 outline-red-500 outline outline-2 text-indigo-100 rounded-md hover:brightness-110 select-none"
+              >
+                {errorMessage}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col items-center justify-center h-auto w-full">
+            <p className="text-center mt-2 mb-8 text-indigo-300">
+              New to Slack?{' '}
+              <button
+                className="text-white underline underline-offset-4"
+                onClick={handleToggle}
+              >
+                Create an account
+              </button>
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }
 
 function SignUp({handleToggle}) {
-  // [wip] pau 10/20-21
   const [newUser, setNewUser] = useState({email: "", password: "", passwordConfirmation: "",});
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false); // [trial, might remove if this will not work, pau 10/21]
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -122,7 +229,7 @@ function SignUp({handleToggle}) {
   
   async function handleSignUp(){
     if (isSubmitting) {
-      return; // [trial] nothing should happen if sub is ongoing
+      return; 
     }
 
     if (!newUser.email || !newUser.password || !newUser.passwordConfirmation) {
@@ -135,7 +242,7 @@ function SignUp({handleToggle}) {
       return;
     }
 
-    setIsSubmitting(true); // [trial] 
+    setIsSubmitting(true);
   
     const signUpData = {
       email: newUser.email,
@@ -147,7 +254,7 @@ function SignUp({handleToggle}) {
       const response = await axios.post(`${API_URL}/auth`, signUpData);
       setSuccessMessage("Sign-up successful. Please sign in.");
       setErrorMessage("");
-      setIsSubmitting(false); // [trial 10/21]
+      setIsSubmitting(false);
       if (response.data && response.data.errors && response.data.errors.full_messages) {
         setErrorMessage(response.data.errors.full_messages[0]);
       } else {
@@ -156,12 +263,7 @@ function SignUp({handleToggle}) {
           password: "",
           passwordConfirmation: "",
         });
-      } // [remove until here if this doesn't work] 
-      // setNewUser({
-      //   email: "",
-      //   password: "",
-      //   passwordConfirmation: "",
-      // });
+      }
     } catch (error) {
       setIsSubmitting(false);
       if (error.response && error.response.data && error.response.data.errors && error.response.data.errors.full_messages) {
@@ -279,7 +381,6 @@ function Onboarding() {
       </div>
     </div>
   );
-
 }
 
 export default Onboarding;
