@@ -1,6 +1,7 @@
 import React from "react";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import Messages from "./pages/Messages";
 
 const RouteData = [
   {
@@ -9,10 +10,15 @@ const RouteData = [
     component: () => <Onboarding />
   },
   {
-    path: "/dashboard",
+    path: "/",
     exact: true,
     component: () => <Dashboard />
-  }
+  },
+  {
+    path: "/messages",
+    exact: true,
+    component: () => <Messages />
+  },
 ];
 
 export default RouteData;

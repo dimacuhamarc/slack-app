@@ -3,6 +3,7 @@ import { API_URL } from '../constants/Constants';
 import axios from 'axios';
 
 import SlackLogo from "../assets/img/slacklogo.png"
+import { Navigate } from 'react-router-dom';
 
 function SignIn({handleToggle}) {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -255,6 +256,8 @@ function SignUp({handleToggle}) {
 
 function Onboarding() {
   const [type, setType] = useState('signin');
+  const user = JSON.parse(localStorage.getItem('user') || null)
+  
 
   if( type === 'signin' ) {
     document.title = 'Login | Slack';
@@ -269,15 +272,18 @@ function Onboarding() {
   }
 
   return (
-    <div className="flex items-center justify-center h-full w-full ">
-      <div className="flex items-center justify-center flex-col bg-indigo-600  w-3/12 h-auto px-12 py-8 rounded-3xl shadow-md shadow-indigo-400 ring-2 ring-offset-indigo-200">
-        <img src={SlackLogo} className="h-8 w-auto my-8 fill-white" alt="" />
-        {/* For SignIn */}
-        {type === "signin" && <SignIn handleToggle={handleToggle} />}   
-        {/* For SignUp */}     
-        {type === "signup" && <SignUp handleToggle={handleToggle} />}
+    <>
+      {user && (<Navigate to="/dashboard" />)}
+      <div className="flex items-center justify-center h-full w-full ">
+        <div className="flex items-center justify-center flex-col bg-indigo-600  w-3/12 h-auto px-12 py-8 rounded-3xl shadow-md shadow-indigo-400 ring-2 ring-offset-indigo-200">
+          <img src={SlackLogo} className="h-8 w-auto my-8 fill-white" alt="" />
+          {/* For SignIn */}
+          {type === "signin" && <SignIn handleToggle={handleToggle} />}   
+          {/* For SignUp */}     
+          {type === "signup" && <SignUp handleToggle={handleToggle} />}
+        </div>
       </div>
-    </div>
+    </>
   );
 
 }
