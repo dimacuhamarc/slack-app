@@ -10,11 +10,11 @@ export const SubNav = (user) => {
   const [channelModVisible, setChannelModVisible] = useState(false);
   const [dmVisible, setDmVisible] = useState(false);
 
-  useEffect(() => {
-    if(user){
-      createChannel();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(user){
+  //     createChannel();
+  //   }
+  // }, []);
 
   const openModal = () => {
     setChannelModVisible(true);
