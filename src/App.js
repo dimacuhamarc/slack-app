@@ -1,13 +1,12 @@
-import logo from './logo.svg';
 import './App.scss';
+import Routing from './Routing';
+import { MainLayout } from './layouts/MainLayout';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="text-3xl font-bold underline bg-indigo-400 p-6 rounded-xl">Slack App! hehe</h1>
-      </header>
-    </div>
+    <MainLayout>
+      <Routing />
+    </MainLayout>
   );
 }
 

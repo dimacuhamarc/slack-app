@@ -1,3 +1,12 @@
+* {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in;
+  user-select: none;
+  //outline: rgba(255, 0, 0, 0.429) solid 1px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
