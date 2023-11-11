@@ -8,12 +8,12 @@ function AddChannels( {openModal} ) {
     <Popover>
       {({ open }) => (
         <>
-          <button className="inline-flex items-center w-full hover:bg-gray-800 hover:bg-opacity-30 rounded p-1">
+          {/* <button className="inline-flex items-center w-full hover:bg-gray-800 hover:bg-opacity-30 rounded p-1">
             <span className="text-xs p-2">
               <FaLock />
             </span>
             <h2 className='text-xs w-full pl-2 text-left'>Channel #1</h2>
-          </button>
+          </button> */}
           <Popover.Button className="inline-flex items-center w-full hover-bg-gray-800 hover:bg-opacity-30 rounded p-1">
             <span className="text-xs p-2">
               <MdAdd />
@@ -42,7 +42,7 @@ function AddChannels( {openModal} ) {
                   Create new channel
                 </button>
                 <button className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-200 hover:text-gray-900">
-                  Browse Channels
+                  Browse channels
                 </button>
               </div>
             </Popover.Panel>
