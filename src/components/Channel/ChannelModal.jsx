@@ -73,6 +73,7 @@ function ChannelModal({ isOpen, onClose, onCreateChannel }) {
                   onChange={(e) => setChannelMembers(e.target.value)}
                   className="mt-1 p-2 block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                 />
+                <p className="text-xs text-blue-700">* Enter Channel Members separated by comma.</p>
               </div>
               <div className="mt-6">
                 <button

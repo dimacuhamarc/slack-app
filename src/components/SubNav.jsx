@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { API_URL } from "../constants/Constants";
 import ChannelList from "./Channel/ChannelList";
 import AddChannels from "./Channel/AddChannels";
@@ -44,8 +44,8 @@ export const SubNav = () => {
       console.error("Error creating channel:", error);
       console.error("User Object:,", user)
       alert("Failed to create channel.");
-    }
   }
+}
   
   const toggleDMs = () => {
     setDmVisible(!dmVisible);
