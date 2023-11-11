@@ -1,9 +1,8 @@
-import React from 'react';
-import { FaLock } from 'react-icons/fa';
-import { MdAdd } from 'react-icons/md';
-import { Popover, Transition } from '@headlessui/react';
+import React from "react";
+import { MdAdd } from "react-icons/md";
+import { Popover, Transition } from "@headlessui/react";
 
-function AddChannels( {openModal} ) {
+function AddChannels({ openModal }) {
   return (
     <Popover>
       {({ open }) => (
@@ -31,7 +30,7 @@ function AddChannels( {openModal} ) {
           >
             <Popover.Panel
               className={`${
-                open ? '' : 'hidden'
+                open ? "" : "hidden"
               } absolute z-10 mt-2 w-40 origin-top-right bg-white rounded shadow-lg`}
             >
               <div className="py-1">

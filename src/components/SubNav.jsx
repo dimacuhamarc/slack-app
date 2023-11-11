@@ -44,8 +44,8 @@ export const SubNav = () => {
       console.error("Error creating channel:", error);
       console.error("User Object:,", user)
       alert("Failed to create channel.");
-    }
   }
+}
   
   const toggleDMs = () => {
     setDmVisible(!dmVisible);

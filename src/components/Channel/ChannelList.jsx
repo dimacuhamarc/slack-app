@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { API_URL } from "../../constants/Constants";
 import { FaLock } from 'react-icons/fa';
 import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
 
-function ChannelList ( { toggleChannels} ) {
-    const [caretIconDown, setCaretIconDown] = useState(true);
+function ChannelList ( { toggleChannels } ) {
+    const [caretIconDown, setCaretIconDown] = useState(false);
     const [channels, setChannels] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -48,13 +49,13 @@ function ChannelList ( { toggleChannels} ) {
         onClick={toggleIcon}>
         <span className=" hover:bg-gray-800 hover:bg-opacity-30 rounded text-xs p-2">
           {caretIconDown ? 
-            <AiFillCaretRight /> : <AiFillCaretDown />
+            <AiFillCaretDown /> : <AiFillCaretRight />
           }
         </span>
         <h1 className="hover:bg-gray-800 hover:bg-opacity-30 rounded pl-2 text-base font-bold w-full h-7">Channels</h1>
       </div>
 
-      {!caretIconDown && (    
+      {/* {!caretIconDown && (    
       <div>
         {channels.map((channel) => (
           <button key={channel.id} className="inline-flex items-center w-full hover:bg-gray-800 hover:bg-opacity-30 rounded p-1">
@@ -67,7 +68,23 @@ function ChannelList ( { toggleChannels} ) {
           </button>
         ))}
       </div>
+      )} */}
+
+    {caretIconDown && channels && channels.length > 0 && (
+        <div>
+          {channels.map((channel) => (
+            <Link key={channel.id} to={`/channel/${channel.id}`} className="inline-flex items-center w-full hover:bg-gray-800 hover:bg-opacity-30 rounded p-1">
+              <span className="text-xs p-2">
+                <FaLock />
+              </span>
+              <h2 className='text-xs w-full pl-2 text-left'>
+                {channel.name}
+              </h2>
+            </Link>
+          ))}
+        </div>
       )}
+
     </>
   );
 };

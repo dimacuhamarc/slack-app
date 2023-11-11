@@ -2,6 +2,7 @@ import React from "react";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Messages from "./pages/Messages";
+import Channels from "./pages/Channels";
 
 const RouteData = [
   {
@@ -18,6 +19,11 @@ const RouteData = [
     path: "/messages",
     exact: true,
     component: () => <Messages />
+  },
+  {
+    path: "/channel/:id",
+    exact: true,
+    component: () => <Channels />
   },
 ];
 
