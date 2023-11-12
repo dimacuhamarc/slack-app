@@ -1,16 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { API_URL } from "../constants/Constants";
+
 import ChannelList from "./Channel/ChannelList";
+import RecentInbox from "./DirectMessages/RecentInbox";
 import AddChannels from "./Channel/AddChannels";
 import ChannelModal from "./Channel/ChannelModal";
+
 import axios from "axios";
+import SearchUsers from "./SearchUsers";
+
 
 export const SubNav = () => {
   const [channelsVisible, setChannelsVisible] = useState(false);
   const [channelModVisible, setChannelModVisible] = useState(false);
   const [dmVisible, setDmVisible] = useState(false);
   const [newChannel, setNewChannel] = useState({name:"", userId:"",})
+
   const user = JSON.parse(localStorage.getItem("user"));
+
+  // const [userList, setUserList] = useState([]);
+  // [wip ni marc]
+
+  // useEffect(() => {
+  //   // Apply getUsers function from UserService here
+  //   async function fetchUsers() {
+  //       const users = await UserService.getUsers(user);
+  //       setUserList(users);
+  //   }
+  //   if (user) {
+  //     fetchUsers();
+  //   }
+  // }, [1])
+
+  // if (userList.length > 0) {
+  //   console.log(userList[0].id);
+  // }
+  
 
   const openModal = () => {
     setChannelModVisible(true);
@@ -56,18 +81,25 @@ export const SubNav = () => {
   };
   return (
     <div className="bg-indigo-800 bg-opacity-70 w-64 h-screen fixed left-16 z-[0] rounded-e-xl text-gray-200">
-        <div className="flex flex-row items-center justify-start px-2 py-4 pt-4 border-b-[1px] border-b-opacity-20 border-b-indigo-200">
-          <h1 className="font-semibold text-xl ml-10">Avion School</h1>
-        </div>
-        <div className="mt-4 ml-8 mr-3">
+      <div className="flex flex-row items-center justify-start px-2 py-4 pt-4 border-b-[1px] border-b-opacity-20 border-b-indigo-200">
+        <h1 className="font-semibold text-xl ml-10">Avion School</h1>
+      </div>
+      <div className="mt-4 ml-8 mr-3">
+        <SearchUsers />
+      </div>
+      <div className="mt-4 ml-8 mr-3">
         <ChannelList toggleChannels={toggleChannels} />
-        {channelsVisible && <AddChannels openModal={openModal} />} {/* openModal function as prop */}
+        {channelsVisible && <AddChannels openModal={openModal} />}{' '}
+        {/* openModal function as prop */}
       </div>
       <ChannelModal
         isOpen={channelModVisible}
         onClose={closeModal}
         onCreateChannel={createChannel}
       />
+      <div className="mt-4 ml-8 mr-3">
+        <RecentInbox toggleChannels={toggleChannels} />
+      </div>
     </div>
   );
 };

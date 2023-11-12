@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_URL } from "../constants/Constants";
 import { AiOutlineSend } from "react-icons/ai";
 import Loader from "./Loader/Loader";
+import { FormatName } from "../services/utilities";
 
 // no timestamp yet for msgs
 
@@ -113,18 +114,18 @@ const ChatBox = ({ receiverId, receiverClass }) => {
   }, [currentUser]); // retrig useEffect whenever the value of current user changes
 
   return (
-    <div className="flex flex-col justify-start items-start w-full px-4 py-4 gap-3 bg-indigo-950 rounded-md">
+    <div className="flex flex-col justify-start items-start h-full w-full px-4 py-4 gap-3 bg-indigo-950 rounded-md">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <div className="flex flex-col w-full overflow-y-auto">
+          <div className="flex flex-col justify-start overflow-y-auto">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className="text-white w-full bg-indigo-900 px-4 py-3 rounded-md mb-3"
+                className="inline-block text-white w-auto bg-indigo-900 px-4 py-3 rounded-md mb-3"
               >
-                <span className="font-semibold text-white">
+                <span className="font-semibold text-xs text-white">
                   {/* 
                     if sender ID is matched with the current user ID, it should display "Me"
                     if the sender has an email, it will display the email add 
@@ -133,15 +134,15 @@ const ChatBox = ({ receiverId, receiverClass }) => {
                   {message.sender && message.sender.id === currentUser?.id
                     ? "Me"
                     : message.sender && message.sender.email
-                    ? message.sender.email
+                    ? FormatName(message.sender.email) 
                     : "Unknown User"}
-                  :
+                  : 
                 </span>
                 <span className="text-white"> {message.body}</span>
               </div>
             ))}
           </div>
-          <div className="flex items-center border w-full rounded-md border-gray-800 pt-5 bg-gray-800">
+          <div className="flex items-center border w-full rounded-md border-gray-800 ">
             <input
               type="text"
               value={newMessage}
