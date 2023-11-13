@@ -55,6 +55,7 @@ function SignIn({ handleToggle }) {
             uid,
             id: data.data.id,
             email: data.data.email,
+            created_at: data.data.created_at,
           });
           setIsSignedIn(true);
         }
@@ -377,7 +378,7 @@ function Onboarding() {
 
   return (
     <>
-      {user && (<Navigate to="/dashboard" />)}
+      {user && (<Navigate to="/" />)}
       <div className="flex items-center justify-center h-full w-full ">
         <div className="flex items-center justify-center flex-col bg-indigo-600  w-3/12 h-auto px-12 py-8 rounded-3xl shadow-md shadow-indigo-400 ring-2 ring-offset-indigo-200">
           <img src={SlackLogo} className="h-8 w-auto my-8 fill-white" alt="" />

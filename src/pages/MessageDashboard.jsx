@@ -2,8 +2,8 @@ import { FaPen } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-function Messages(props) {
-  document.title = "Direct Message | Slack";
+function MessageDashboard(props) {
+  document.title = 'Avion School | Inbox';
 
   const inbox = [
     {
@@ -45,7 +45,7 @@ function Messages(props) {
       <div className="flex flex-col justify-start items-start w-full px-4 py-4 gap-3 bg-indigo-950 rounded-md">     
         {
           inbox.map((message, index) => (
-            <Link className="w-full">
+            <Link key={index} className="w-full">
               <div className="inline-flex flex-row gap-4 items-center justify-center text-white w-full bg-indigo-900 px-4 py-3 rounded-md hover:scale-[1.01] hover:brightness-110">
                 <BsFillPersonFill className="text-black w-8 h-8 p-1 rounded-lg bg-white" />
                 <div className="inline-block w-full">
@@ -67,4 +67,4 @@ function Messages(props) {
   );
 }
 
-export default Messages;
+export default MessageDashboard;

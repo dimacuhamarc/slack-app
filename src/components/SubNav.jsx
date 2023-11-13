@@ -5,6 +5,7 @@ import ChannelList from "./Channel/ChannelList";
 import RecentInbox from "./DirectMessages/RecentInbox";
 import AddChannels from "./Channel/AddChannels";
 import ChannelModal from "./Channel/ChannelModal";
+import SearchUsers from "./SearchUsers";
 
 import axios from "axios";
 // import SearchUsers from "./SearchUsers";
@@ -16,25 +17,6 @@ export const SubNav = () => {
   const [dmVisible, setDmVisible] = useState(false);
   const [newChannel, setNewChannel] = useState({ name: "", userId: "" });
   const user = JSON.parse(localStorage.getItem("user"));
-
-  // const [userList, setUserList] = useState([]);
-  // [wip ni marc]
-
-  // useEffect(() => {
-  //   // Apply getUsers function from UserService here
-  //   async function fetchUsers() {
-  //       const users = await UserService.getUsers(user);
-  //       setUserList(users);
-  //   }
-  //   if (user) {
-  //     fetchUsers();
-  //   }
-  // }, [1])
-
-  // if (userList.length > 0) {
-  //   console.log(userList[0].id);
-  // }
-  
 
   const openModal = () => {
     setChannelModVisible(true);
@@ -91,7 +73,7 @@ export const SubNav = () => {
         <h1 className="font-semibold text-xl ml-10">Avion School</h1>
       </div>
       <div className="mt-4 ml-8 mr-3">
-        {/* <SearchUsers /> */}
+        <SearchUsers />
       </div>
       <div className="mt-4 ml-8 mr-3">
         <ChannelList toggleChannels={toggleChannels} />

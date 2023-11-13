@@ -10,13 +10,13 @@ import ChannelService from "../services/ChannelServices";
 import axios from "axios";
 
 function Channels() {
-  document.title = "Channels | Slack";
+  
   const { id } = useParams();
   const [addModVisible, setAddModVisible] = useState(false);
   const [newMember, setNewMember] = useState("");
   const [channelName, setChannelName] = useState("")
   const [showChannelDetails, setChannelDetails] = useState(false);
-
+  document.title = `Avion Slack | ${channelName}`;
   useEffect(() => {
     // console.log("Channel Id:", id)
     async function fetchChannelInfo() {
