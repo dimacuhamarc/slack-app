@@ -16,7 +16,7 @@ export const MainLayout = ({ children }) => {
       {
         user ? (
           <>
-            <div className="w-full pl-[22rem] p-6 h-screen bg-slate-950">
+            <div className="w-full pl-[22rem] p-6 pb-[5rem] h-screen bg-slate-950">
               {children}
             </div>
           </> 

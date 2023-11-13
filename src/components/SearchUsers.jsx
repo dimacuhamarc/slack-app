@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Combobox } from '@headlessui/react'
-import UserList from "./UserList";
 
 function SearchUsers ({userList}) {
   const [selectedPerson, setSelectedPerson] = useState(null);

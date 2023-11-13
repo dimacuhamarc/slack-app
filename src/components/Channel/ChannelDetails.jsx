@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ChannelService from "../../services/ChannelServices";
 import { useParams } from "react-router-dom";
+import { FormatTimestamp } from "../../services/utilities";
 
 function ChannelDetails({ isOpen, onClose }) {
   const [channelInfo, setChannelInfo] = useState(null);
@@ -75,7 +76,7 @@ function ChannelDetails({ isOpen, onClose }) {
                     <ul>
                       {channelInfo.data.channel_members &&
                         channelInfo.data.channel_members.map((member) => (
-                          <li key={member.user_id}>{member.user_id} : Added {member.created_at}</li>
+                          <li key={member.user_id}>{member.user_id} : Added {FormatTimestamp(member.created_at)}</li>
                         ))}
                     </ul>
                   </>

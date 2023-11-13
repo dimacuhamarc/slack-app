@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { API_URL } from "../constants/Constants";
 
 import ChannelList from "./Channel/ChannelList";
@@ -7,7 +7,7 @@ import AddChannels from "./Channel/AddChannels";
 import ChannelModal from "./Channel/ChannelModal";
 
 import axios from "axios";
-import SearchUsers from "./SearchUsers";
+// import SearchUsers from "./SearchUsers";
 
 
 export const SubNav = () => {
@@ -91,7 +91,7 @@ export const SubNav = () => {
         <h1 className="font-semibold text-xl ml-10">Avion School</h1>
       </div>
       <div className="mt-4 ml-8 mr-3">
-        <SearchUsers />
+        {/* <SearchUsers /> */}
       </div>
       <div className="mt-4 ml-8 mr-3">
         <ChannelList toggleChannels={toggleChannels} />

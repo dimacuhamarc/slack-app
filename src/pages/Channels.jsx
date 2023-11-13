@@ -101,7 +101,7 @@ function Channels() {
         />
       </div>
 
-      <div className="flex w-full">
+      <div className="flex w-full h-full">
         <ChatBox receiverId={id} receiverClass="Channel" />
       </div>
 
