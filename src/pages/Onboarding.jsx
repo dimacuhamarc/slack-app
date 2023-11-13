@@ -11,6 +11,7 @@ function SignIn({ handleToggle }) {
   const [errorMessage, setErrorMessage] = useState('Error Message');
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem('user') || null)
   );
@@ -61,6 +62,7 @@ function SignIn({ handleToggle }) {
         setError(true);
         setErrorMessage('Error: Invalid Credentials');
       }
+
   
       setLoading(false);
       window.location.reload();

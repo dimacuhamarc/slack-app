@@ -7,19 +7,19 @@ const UserList = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const [userList, setUserList] = useState([]);
 
-  useEffect(() => {
-    // Apply getUsers function from UserService here
-    async function fetchUsers() {
-      try {
-        const users = await UserService.getUsers(user);
-        setUserList(users);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    }
+  // useEffect(() => {
+  //   // Apply getUsers function from UserService here
+  //   async function fetchUsers() {
+  //     try {
+  //       const users = await UserService.getUsers(user);
+  //       setUserList(users);
+  //     } catch (error) {
+  //       console.error('Error fetching users:', error);
+  //     }
+  //   }
 
-    fetchUsers();
-  }, [user]);
+  //   fetchUsers();
+  // }, [user]);
 
   return (
     <>

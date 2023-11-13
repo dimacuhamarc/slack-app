@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { BsFillPersonFill } from "react-icons/bs";
+
 import axios from 'axios';
 import { API_URL } from '../constants/Constants';
 import { AiOutlineSend } from 'react-icons/ai';
@@ -125,8 +127,10 @@ const ChatBox = ({ receiverId, receiverClass }) => {
             {messages.map((message) => (
               <div
                 key={message.id}
-                className="flex flex-col items-start justify-start text-white bg-indigo-900 snap-start px-4 py-3 rounded-md mb-3"
+                className="flex flex-row items-center justify-center gap-4 text-white bg-indigo-900 snap-start px-4 py-3 rounded-md mb-3"
               >
+                <BsFillPersonFill className={message.sender && message.sender.id === currentUser?.id ? 'text-indigo-500 w-8 h-8 p-1 rounded-lg bg-white' : 'text-black w-8 h-8 p-1 rounded-lg bg-white'} />
+                <div className='flex flex-col items-start justify-start w-full'>
                 <span className='inline-flex flex-row justify-between items-start mb-0.5 w-full'>
                   <span className="inline font-extrabold text-base  text-indigo-100 transition-all ease-in-out hover:text-white hover:underline w-full">
                     {/* 
@@ -146,6 +150,7 @@ const ChatBox = ({ receiverId, receiverClass }) => {
                 </span>
 
                 <span className="block w-full text-sm text-white"> {message.body}</span>
+              </div>
               </div>
             ))}
             <span className='overflow-anchor'></span>
