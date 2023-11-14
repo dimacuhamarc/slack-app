@@ -85,6 +85,7 @@ function ChannelModal({ isOpen, onClose, onCreateChannel }) {
                 </label>
                 <input
                   required
+                  maxLength={15}
                   type="text"
                   id="channelName"
                   name="channelName"
