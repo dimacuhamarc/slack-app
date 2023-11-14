@@ -8,6 +8,7 @@ const Routing = () => {
   return (
     <>
       {!user && <Navigate to="/onboarding" />}
+      {/* {user && fetchUsers} */}
       <Routes>
         {RouteData.map((route) => (
           <Route

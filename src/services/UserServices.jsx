@@ -13,10 +13,11 @@ const UserService = {
                     uid: user.uid
                 }
             })
+            
             const users = response.data.data;
             return users.filter((user) => user.id >= 4000);
         } catch(error){
-            if(error.response.data.errors){
+            if(error.response && error.response.data && error.response.data.errors){
                 return alert("Cannot get users");
             }
         }

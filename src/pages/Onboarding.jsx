@@ -11,6 +11,7 @@ function SignIn({ handleToggle }) {
   const [errorMessage, setErrorMessage] = useState('Error Message');
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem('user') || null)
   );
@@ -54,6 +55,7 @@ function SignIn({ handleToggle }) {
             uid,
             id: data.data.id,
             email: data.data.email,
+            created_at: data.data.created_at,
           });
           setIsSignedIn(true);
         }
@@ -61,6 +63,7 @@ function SignIn({ handleToggle }) {
         setError(true);
         setErrorMessage('Error: Invalid Credentials');
       }
+
   
       setLoading(false);
       window.location.reload();
@@ -375,7 +378,7 @@ function Onboarding() {
 
   return (
     <>
-      {user && (<Navigate to="/dashboard" />)}
+      {user && (<Navigate to="/" />)}
       <div className="flex items-center justify-center h-full w-full ">
         <div className="flex items-center justify-center flex-col bg-indigo-600  w-3/12 h-auto px-12 py-8 rounded-3xl shadow-md shadow-indigo-400 ring-2 ring-offset-indigo-200">
           <img src={SlackLogo} className="h-8 w-auto my-8 fill-white" alt="" />
@@ -388,5 +391,6 @@ function Onboarding() {
     </>
   );
 }
+
 
 export default Onboarding;
