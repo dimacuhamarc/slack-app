@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BsFillPersonFill } from "react-icons/bs";
 
 import axios from 'axios';
@@ -14,6 +15,8 @@ const ChatBox = ({ receiverId, receiverClass }) => {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCurrentUser(); //fetches the info from localStorage
@@ -124,6 +127,16 @@ const ChatBox = ({ receiverId, receiverClass }) => {
     }
   }, [currentUser]); // retrig useEffect whenever the value of current user changes
 
+  const handleUserClick = (event, user) => {
+    event.preventDefault();
+    if (user === currentUser.id) {
+      alert("You cannot message yourself!");
+    }
+    else {
+      navigate(`/messages/${user}`);
+    }
+  }
+
   return (
     <div className="flex flex-col justify-between items-start w-full px-4 py-4 gap-3 bg-indigo-950 rounded-md">
       {/* {loading ? (
@@ -141,19 +154,19 @@ const ChatBox = ({ receiverId, receiverClass }) => {
         <div className="block w-full overflow-y-auto scroll-smooth snap-y">
           {currentUser ? (
             messages.length > 0 ? (
-              messages.map((message) => (
+              messages.map((message, index) => (
                 <div
-                  key={message.id}
+                  key={index}
                   className="flex flex-row items-center justify-center gap-4 text-white bg-indigo-900 snap-start px-4 py-3 rounded-md mb-3 hover:scale-[1.01] hover:brightness-110"
                 >
                   <BsFillPersonFill className={message.sender && message.sender.id === currentUser?.id ? 'text-indigo-500 w-8 h-8 p-1 rounded-lg bg-white' : 'text-black w-8 h-8 p-1 rounded-lg bg-white'} />
                 <div className='flex flex-col items-start justify-start w-full'>
                 <span className="inline-flex flex-row justify-between items-start mb-0.5 w-full">
-                    <span className="inline font-extrabold text-base  text-indigo-100 transition-all ease-in-out hover:text-white hover:underline w-full">
+                    <h1 className="inline font-extrabold text-base  text-indigo-100 transition-all ease-in-out hover:text-white hover:underline w-full cursor-pointer" onClick={(e) => {handleUserClick(e,message.sender.id)}}>
                       {message.sender && message.sender.email
                         ? FormatName(message.sender.email)
                         : "Unknown User"}
-                    </span>
+                    </h1>
                     <span className="inline self-center text-right text-xs w-full">
                       {FormatTimestamp(message.created_at)}
                     </span>
@@ -167,7 +180,7 @@ const ChatBox = ({ receiverId, receiverClass }) => {
               </div>
               ))
             ) : (
-              <span className="flex justify-center text-white">No message to display</span>
+              <span className="flex justify-center text-gray-400">Start your productivity by starting a conversation now!</span>
             )
           ) : null}
           <span className="overflow-anchor"></span>

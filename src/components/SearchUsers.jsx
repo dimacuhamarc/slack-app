@@ -43,6 +43,22 @@ function SearchUsers () {
     event.preventDefault();
     if(selected) {
       console.log(selected);
+      if(localStorage.getItem('recentList') === null) {
+        const recentList = [];
+        recentList.push(selected);
+        localStorage.setItem('recentList', JSON.stringify(recentList));
+      } if (JSON.parse(localStorage.getItem('recentList')).includes(selected)) {
+        console.log("User already exists in recent list");
+      }
+      else {
+        const existingList = JSON.parse(localStorage.getItem('recentList'));
+
+        existingList.push(selected);
+
+        localStorage.setItem('recentList', JSON.stringify(existingList));
+      }
+    }
+    if(selected) {
       navigate(`/messages/${selected}`);
       setSelected(null);
       setSearch('');

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { FormatName } from "../../services/utilities";
 import { IoInformationCircle } from "react-icons/io5";
 import ReceiverDetails from "./ReceiverDetails";
+import ChatBox from "../ChatBox";
 
 function Messages() {
   const { id } = useParams();
@@ -55,8 +56,11 @@ function Messages() {
         /> 
       </div>
       <div className="flex w-full h-full">
-        <ReceiverDetails isOpen={showReceiverDetails} onClose={closeReceiverDetails} receiverId={receiverId} receiverName={receiverName}/>
+        <div className="flex w-full h-full">
+          <ChatBox receiverId={id} receiverClass="User" />
+        </div>
       </div>
+      <ReceiverDetails isOpen={showReceiverDetails} onClose={closeReceiverDetails} receiverId={receiverId} receiverName={receiverName}/>
     </>
   )
 }
