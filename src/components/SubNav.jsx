@@ -2,7 +2,7 @@ import { useState } from "react";
 import { API_URL } from "../constants/Constants";
 
 import ChannelList from "./Channel/ChannelList";
-import RecentInbox from "./DirectMessages/RecentInbox";
+import RecentList from "./DirectMessages/RecentList";
 import AddChannels from "./Channel/AddChannels";
 import ChannelModal from "./Channel/ChannelModal";
 import SearchUsers from "./SearchUsers";
@@ -78,7 +78,6 @@ export const SubNav = () => {
       <div className="mt-4 ml-8 mr-3">
         <ChannelList toggleChannels={toggleChannels} />
         {channelsVisible && <AddChannels openModal={openModal} />}{' '}
-        {/* openModal function as prop */}
       </div>
       <ChannelModal
         isOpen={channelModVisible}
@@ -86,7 +85,7 @@ export const SubNav = () => {
         onCreateChannel={createChannel}
       />
       <div className="mt-4 ml-8 mr-3">
-        <RecentInbox toggleChannels={toggleChannels} />
+        <RecentList toggleRecents={toggleDMs} />
       </div>
     </div>
   );
