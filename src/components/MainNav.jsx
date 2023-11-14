@@ -15,11 +15,6 @@ const MainLinks = [
     name: 'Home',
     icon: <AiFillHome/>,
     to: '/'
-  },
-  {
-    name: 'DMs',
-    icon: <AiFillWechat/>,
-    to: '/messages'
   }
 ]
 

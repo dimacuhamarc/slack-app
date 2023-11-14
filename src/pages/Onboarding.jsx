@@ -70,84 +70,6 @@ function SignIn({ handleToggle }) {
     }, 3000); 
   }
 
-  //   try {
-  //     const loginCredentials = {
-  //       email,
-  //       password
-  //     }
-  //     const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
-  //     const { data, headers } = response;
-  //     if (data && headers) {
-  //       const accessToken = headers["access-token"];
-  //       const expiry = headers["expiry"];
-  //       const client = headers["client"];
-  //       const uid = headers["uid"];
-
-  //       setUser({
-  //         accessToken,
-  //         expiry,
-  //         client,
-  //         uid,
-  //         id: data.data.id,
-  //         email: data.data.email
-  //       })
-  //       setIsSignedIn(true);
-  //     }
-  //   }
-  //   catch (error) {
-  //     setError(true);
-  //     setErrorMessage('Error: Invalid Credentials');
-  //   }
-  //   window.location.reload();
-  // }
-
-  // return (
-  //   <>
-  //     <div className="flex flex-col items-center justify-center h-auto w-full">
-  //       <h1 className=" text-3xl font-bold m-2 text-gray-200">
-  //         Sign in to Slack!
-  //       </h1>
-  //       <p className="text-center mt-2 text-indigo-300">We suggest using the email address you   used to sign up.</p>
-  //     </div>
-
-  //     <div className="flex flex-col items-start justify-center h-auto w-full">
-  //       <label className="text-sm font-bold m-2 text-gray-200">Email</label>
-  //       <input
-  //         className="border border-gray-400 rounded-md p-2 w-full"
-  //         type="text"
-  //         name="email"
-  //         onChange={(e) => setEmail(e.target.value)}
-  //         placeholder="User@slack.com"
-  //       />
-  //     </div>
-  //     <div className="flex flex-col items-start justify-center h-auto w-full">
-  //       <label className="text-sm font-bold m-2 text-gray-200">
-  //         Password
-  //       </label>
-  //       <input
-  //         className="border border-gray-400 rounded-md p-2 w-full"
-  //         type="password"
-  //         name="password"
-  //         onChange={(e) => setPassword(e.target.value)}
-  //         placeholder="Enter your password"
-  //       />
-  //     </div>
-  //     <div className="flex flex-col items-start justify-center h-auto w-full">
-  //       <button onClick={handleSubmit} className="text-sm w-full h-12 font-bold my-4 bg-indigo-400 text-indigo-100 rounded-md hover:bg-indigo-300 hover:text-indigo-600 cursor-pointer select-none ">
-  //         Sign In
-  //       </button>
-  //       {
-  //         error && <p type="submit" className="flex flex-col items-center justify-center text-sm w-full h-12 font-bold bg-red-600 bg-opacity-70 outline-red-500 outline outline-2 text-indigo-100 rounded-md hover:brightness-110 select-none">
-  //         {errorMessage}
-  //       </p>
-  //       }
-  //     </div>
-  //     <div className="flex flex-col items-center justify-center h-auto w-full">
-  //       <p className="text-center mt-2 mb-8 text-indigo-300">New to Slack? <button className="text-white underline underline-offset-4" onClick={handleToggle}>Create an account</button></p>
-  //     </div>
-  //   </>
-  // );
-
   return (
     <>
       {loading ? ( 
@@ -155,6 +77,8 @@ function SignIn({ handleToggle }) {
           <Loader />
         </div>
       ) : (
+        <>
+        <img src={SlackLogo} className="h-8 w-auto my-8 fill-white" alt="" />
         <div>
           <div className="flex flex-col items-center justify-center h-auto w-full">
             <h1 className="text-3xl font-bold m-2 text-gray-200">
@@ -215,6 +139,7 @@ function SignIn({ handleToggle }) {
             </p>
           </div>
         </div>
+        </>
       )}
     </>
   );
@@ -381,7 +306,6 @@ function Onboarding() {
       {user && (<Navigate to="/" />)}
       <div className="flex items-center justify-center h-full w-full ">
         <div className="flex items-center justify-center flex-col bg-indigo-600  w-3/12 h-auto px-12 py-8 rounded-3xl shadow-md shadow-indigo-400 ring-2 ring-offset-indigo-200">
-          <img src={SlackLogo} className="h-8 w-auto my-8 fill-white" alt="" />
           {/* For SignIn */}
           {type === "signin" && <SignIn handleToggle={handleToggle} />}   
           {/* For SignUp */}     
