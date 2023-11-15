@@ -1,6 +1,7 @@
 import { FormatName } from '../services/utilities';
 import MyChannels from '../components/Dashboard/MyChannels';
 import MyMessages from '../components/Dashboard/MyMessages';
+import RandomMessage from '../components/Dashboard/RandomMessage';
 
 function Dashboard(props) {
   document.title = 'Avion School | Slack';
@@ -12,6 +13,7 @@ function Dashboard(props) {
       <h1 className="text-white text-4xl font-normal">Welcome, <span className='font-bold text-indigo-300 underline underline-offset-4'>{user && FormatName(user.email)}</span>!</h1>
       <MyChannels/>
       {rL && <MyMessages/>}
+      {!rL && <RandomMessage/>}
     </div>
   );
 }

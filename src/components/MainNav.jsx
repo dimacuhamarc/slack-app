@@ -1,6 +1,5 @@
 import {
   AiFillHome,
-  AiFillWechat,
   AiOutlineEllipsis
 } from 'react-icons/ai';
 import { IoLogOut } from 'react-icons/io5';
